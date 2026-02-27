@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOLLTE FITNESS AND WELLNESS — CROSSFIT OPEN 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="#" class="logo-link" aria-label="Sollte inicio">
+        <img src="assets/sollte_blanco-a34442c0-db4d-4341-b5b1-014759856903.png" alt="Sollte Fitness and Wellness" class="logo">
+      </a>
+      <h1 class="title">SOLLTE FITNESS AND WELLNESS<br>CROSSFIT OPEN 2026</h1>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- Sección Workouts -->
+    <section class="section-workouts" aria-label="Workouts">
+      <h2 class="section-title section-title-workouts">WORKOUTS</h2>
+      <div class="workouts-layout">
+        <div class="workouts-list-container">
+          <ul class="workouts-list" id="workouts-list" role="list"></ul>
+        </div>
+        <div id="workout-detail-area" class="workout-detail-area hidden" aria-live="polite">
+          <div class="workout-detail-card">
+            <button type="button" class="back-link" id="back-to-list" aria-label="Volver a la lista">← Volver</button>
+            <article id="workout-detail-content"></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección Leaderboard -->
+    <section class="section-leaderboard" aria-label="Leaderboard">
+      <h2 class="section-title section-title-leaderboard">LEADERBOARD</h2>
+      <div class="leaderboard-tabs" role="tablist">
+        <button type="button" class="tab active" role="tab" data-location="belmonte" aria-selected="true">BELMONTE</button>
+        <button type="button" class="tab" role="tab" data-location="envigado">ENVIGADO</button>
+        <button type="button" class="tab" role="tab" data-location="cuba">CUBA</button>
+      </div>
+      <div class="leaderboard-table-wrap empty">
+        <table class="leaderboard-table" id="leaderboard-table">
+          <thead>
+            <tr>
+              <th scope="col">Posición</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Puntos</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body">
+            <!-- Rellenado por JS cuando haya datos -->
+          </tbody>
+        </table>
+        <p class="leaderboard-empty" id="leaderboard-empty">Aquí verás el leaderboard.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
