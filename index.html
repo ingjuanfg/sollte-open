@@ -41,9 +41,24 @@
     <section class="section-leaderboard" aria-label="Leaderboard">
       <h2 class="section-title section-title-leaderboard">LEADERBOARD</h2>
       <div class="leaderboard-tabs" role="tablist">
-        <button type="button" class="tab active" role="tab" data-location="belmonte" aria-selected="true">BELMONTE</button>
-        <button type="button" class="tab" role="tab" data-location="envigado">ENVIGADO</button>
-        <button type="button" class="tab" role="tab" data-location="cuba">CUBA</button>
+        <button type="button" class="tab active" role="tab" data-location="envigado" aria-selected="true">ENVIGADO</button>
+        <button type="button" class="tab" role="tab" data-location="pereira">PEREIRA</button>
+      </div>
+      <div class="leaderboard-filters">
+        <div class="filter-group">
+          <span class="filter-label">Género</span>
+          <div class="filter-buttons">
+            <button type="button" class="filter-btn active" data-genero="mujeres">Mujeres</button>
+            <button type="button" class="filter-btn" data-genero="hombres">Hombres</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Categoría</span>
+          <div class="filter-buttons">
+            <button type="button" class="filter-btn active" data-categoria="scaled">Scaled</button>
+            <button type="button" class="filter-btn" data-categoria="rx">RX</button>
+          </div>
+        </div>
       </div>
       <div class="leaderboard-table-wrap empty">
         <table class="leaderboard-table" id="leaderboard-table">
@@ -52,10 +67,13 @@
               <th scope="col">Posición</th>
               <th scope="col">Nombre</th>
               <th scope="col">Puntos</th>
+              <th scope="col">26.1</th>
+              <th scope="col">26.2</th>
+              <th scope="col">26.3</th>
             </tr>
           </thead>
           <tbody id="leaderboard-body">
-            <!-- Rellenado por JS cuando haya datos -->
+            <!-- Rellenado por JS -->
           </tbody>
         </table>
         <p class="leaderboard-empty" id="leaderboard-empty">Aquí verás el leaderboard.</p>
