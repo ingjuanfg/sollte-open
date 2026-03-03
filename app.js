@@ -11,6 +11,11 @@
   var leaderboardBody = document.getElementById('leaderboard-body');
   var tableWrap = document.querySelector('.leaderboard-table-wrap');
 
+  var currentGenero = 'mujeres';
+  var currentCategoria = 'scaled';
+  var currentLocation = 'envigado';
+  var resultsBasePath = 'resultados/26.1';
+
   function renderWorkoutsList() {
     workoutsList.innerHTML = '';
     data.workouts.forEach(function (w) {
@@ -42,38 +47,120 @@
 
   function escapeHtml(text) {
     var div = document.createElement('div');
-    div.textContent = text;
+    div.textContent = text == null ? '' : String(text);
     return div.innerHTML;
   }
 
-  function renderLeaderboard(location) {
-    var rows = data.leaderboard[location] || [];
-    leaderboardBody.innerHTML = '';
-    rows.forEach(function (r) {
-      var tr = document.createElement('tr');
-      tr.innerHTML =
-        '<td class="rank">' + escapeHtml(String(r.posicion != null ? r.posicion : r.rank)) + '</td>' +
-        '<td>' + escapeHtml(r.nombre || r.name || '') + '</td>' +
-        '<td>' + escapeHtml(String(r.puntos != null ? r.puntos : r.points || '')) + '</td>';
-      leaderboardBody.appendChild(tr);
+  function parseCSV(text) {
+    var lines = text.trim().split('\n');
+    if (lines.length < 2) return [];
+    var rows = [];
+    for (var i = 1; i < lines.length; i++) {
+      var parts = lines[i].split(',');
+      if (parts.length < 2) continue;
+      var nombre = parts[0].trim();
+      var w261 = parts[1].trim();
+      var w262 = parts[2] ? parts[2].trim() : '';
+      var w263 = parts[3] ? parts[3].trim() : '';
+      var reps261 = w261 === '' ? 0 : parseInt(w261, 10);
+      if (isNaN(reps261)) reps261 = 0;
+      rows.push({
+        nombre: nombre,
+        puntos: 0,
+        w261: w261,
+        w262: w262,
+        w263: w263,
+        reps261: reps261
+      });
+    }
+    return rows;
+  }
+
+  function sortAndAssignPoints(rows) {
+    rows.sort(function (a, b) {
+      return b.reps261 - a.reps261;
     });
-    tableWrap.classList.toggle('empty', rows.length === 0);
+    rows.forEach(function (r, i) {
+      r.posicion = i + 1;
+      r.puntos = i + 1;
+    });
+    return rows;
+  }
+
+  function loadAndRenderLeaderboard() {
+    var filename = currentGenero + '-' + currentCategoria + '-' + currentLocation + '.csv';
+    var url = resultsBasePath + '/' + filename;
+    leaderboardBody.innerHTML = '';
+    tableWrap.classList.add('empty');
+
+    fetch(url)
+      .then(function (res) {
+        if (!res.ok) throw new Error('No se pudo cargar');
+        return res.text();
+      })
+      .then(function (text) {
+        var rows = parseCSV(text);
+        rows = sortAndAssignPoints(rows);
+        tableWrap.classList.remove('empty');
+        rows.forEach(function (r) {
+          var tr = document.createElement('tr');
+          var posDisplay = r.posicion === 1 ? '1 🥇' : r.posicion === 2 ? '2 🥈' : r.posicion === 3 ? '3 🥉' : String(r.posicion);
+          var w261Display = r.w261 === '' ? '—' : r.w261 + ' Reps';
+          var w262Display = r.w262 === '' ? '—' : r.w262;
+          var w263Display = r.w263 === '' ? '—' : r.w263;
+          tr.innerHTML =
+            '<td class="rank">' + escapeHtml(posDisplay) + '</td>' +
+            '<td>' + escapeHtml(r.nombre) + '</td>' +
+            '<td>' + escapeHtml(String(r.puntos)) + '</td>' +
+            '<td>' + escapeHtml(w261Display) + '</td>' +
+            '<td>' + escapeHtml(w262Display) + '</td>' +
+            '<td>' + escapeHtml(w263Display) + '</td>';
+          leaderboardBody.appendChild(tr);
+        });
+      })
+      .catch(function () {
+        tableWrap.classList.add('empty');
+      });
+  }
+
+  function setActiveFilter(selector, value) {
+    document.querySelectorAll(selector).forEach(function (btn) {
+      var isActive = btn.getAttribute(btn.hasAttribute('data-genero') ? 'data-genero' : 'data-categoria') === value;
+      btn.classList.toggle('active', isActive);
+    });
   }
 
   document.querySelectorAll('.leaderboard-tabs .tab').forEach(function (tab) {
     tab.addEventListener('click', function () {
+      currentLocation = tab.getAttribute('data-location');
       document.querySelectorAll('.leaderboard-tabs .tab').forEach(function (t) {
         t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
+        t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
       });
       tab.classList.add('active');
       tab.setAttribute('aria-selected', 'true');
-      renderLeaderboard(tab.getAttribute('data-location'));
+      loadAndRenderLeaderboard();
+    });
+  });
+
+  document.querySelectorAll('.filter-btn[data-genero]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      currentGenero = btn.getAttribute('data-genero');
+      setActiveFilter('.filter-btn[data-genero]', currentGenero);
+      loadAndRenderLeaderboard();
+    });
+  });
+
+  document.querySelectorAll('.filter-btn[data-categoria]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      currentCategoria = btn.getAttribute('data-categoria');
+      setActiveFilter('.filter-btn[data-categoria]', currentCategoria);
+      loadAndRenderLeaderboard();
     });
   });
 
   backToList.addEventListener('click', closeWorkoutDetail);
 
   renderWorkoutsList();
-  renderLeaderboard('belmonte');
+  loadAndRenderLeaderboard();
 })();

@@ -236,6 +236,51 @@ body {
   border-color: var(--sollte-accent);
   color: var(--sollte-black);
 }
+.leaderboard-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 900px;
+}
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.filter-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--sollte-text-muted);
+}
+.filter-buttons {
+  display: flex;
+  gap: 0.35rem;
+}
+.filter-btn {
+  font-family: var(--font);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.45rem 0.9rem;
+  border: 2px solid var(--sollte-gray);
+  background: var(--sollte-card);
+  color: var(--sollte-text-muted);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-btn:hover {
+  color: var(--sollte-text);
+  border-color: var(--sollte-gray-light);
+}
+.filter-btn.active {
+  background: var(--sollte-accent);
+  border-color: var(--sollte-accent);
+  color: var(--sollte-black);
+}
 .leaderboard-table-wrap {
   overflow-x: auto;
   background: var(--sollte-card);
