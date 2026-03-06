@@ -11,8 +11,8 @@ window.SOLLTE_DATA = {
     {
       id: '2',
       name: 'WORKOUT #2',
-      description: 'El lanzamiento del Workout #2 será el 5 de marzo.',
-      standards: ''
+      description: 'For time:\n\n80-foot dumbbell overhead walking lunge\n20 alternating dumbbell snatches\n20 pull-ups\n\n80-foot dumbbell overhead walking lunge\n20 alternating dumbbell snatches\n20 chest-to-bar pull-ups\n\n80-foot dumbbell overhead walking lunge\n20 alternating dumbbell snatches\n20 muscle-ups\n\nTime cap: 15 minutes',
+      standards: '♀ 35-lb (15-kg) dumbbell\n\n♂ 50-lb (22.5-kg) dumbbell'
     },
     {
       id: '3',

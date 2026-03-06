@@ -89,7 +89,7 @@
 
   function loadAndRenderLeaderboard() {
     var filename = currentGenero + '-' + currentCategoria + '-' + currentLocation + '.csv';
-    var url = resultsBasePath + '/' + filename;
+    var url = resultsBasePath + '/' + currentLocation + '/' + filename;
     leaderboardBody.innerHTML = '';
     tableWrap.classList.add('empty');
 
