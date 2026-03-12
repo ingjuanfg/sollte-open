@@ -122,8 +122,9 @@
   }
 
   function loadAndRenderLeaderboard() {
+    var cacheBust = '?v=' + Date.now();
     var filename26_1 = currentGenero + '-' + currentCategoria + '-' + currentLocation + '.csv';
-    var url26_1 = resultsBasePath26_1 + '/' + currentLocation + '/' + filename26_1;
+    var url26_1 = resultsBasePath26_1 + '/' + currentLocation + '/' + filename26_1 + cacheBust;
     leaderboardBody.innerHTML = '';
     tableWrap.classList.add('empty');
 
@@ -131,7 +132,7 @@
       var generoCap = currentGenero === 'hombres' ? 'Hombres' : 'Mujeres';
       var catCap = currentCategoria === 'rx' ? 'RX' : 'Scaled';
       var filename26_2 = '26.2-' + generoCap + '-' + catCap + '-Envigado.csv';
-      var url26_2 = resultsBasePath26_2 + '/envigado/' + filename26_2;
+      var url26_2 = resultsBasePath26_2 + '/envigado/' + filename26_2 + cacheBust;
 
       Promise.all([
         fetch(url26_1).then(function (r) { return r.ok ? r.text() : Promise.reject(new Error('26.1')); }),
@@ -242,7 +243,7 @@
       return;
     }
 
-    fetch(url26_1)
+    fetch(url26_1 + cacheBust)
       .then(function (res) {
         if (!res.ok) throw new Error('No se pudo cargar');
         return res.text();

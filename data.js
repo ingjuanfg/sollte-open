@@ -17,8 +17,8 @@ window.SOLLTE_DATA = {
     {
       id: '3',
       name: 'WORKOUT #3',
-      description: 'El lanzamiento del Workout #3 será el 13 de marzo.',
-      standards: ''
+      description: 'For time:\n\n2 rounds of:\n12 burpees over the bar\n12 cleans, weight 1\n12 burpees over the bar\n12 thrusters, weight 1\n\n2 rounds of:\n12 burpees over the bar\n12 cleans, weight 2\n12 burpees over the bar\n12 thrusters, weight 2\n\n2 rounds of:\n12 burpees over the bar\n12 cleans, weight 3\n12 burpees over the bar\n12 thrusters, weight 3\n\nTime cap: 16 minutes',
+      standards: '♀ 65, 75, 85 lb (29, 34, 38 kg)\n\n♂ 95, 115, 135 lb (43, 52, 61 kg)'
     }
   ],
   // Cuando tengas resultados, añade objetos con: posicion, nombre, puntos
