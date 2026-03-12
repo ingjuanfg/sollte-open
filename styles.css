@@ -304,6 +304,58 @@ body {
   text-align: left;
   border-bottom: 1px solid var(--sollte-gray);
 }
+/* Centrar encabezados 26.1 y 26.2 sobre sus subcolumnas */
+.leaderboard-table .th-group {
+  text-align: center;
+}
+.leaderboard-table .th-group-26-2 {
+  text-align: center;
+}
+/* Puntos: centrado en la columna */
+.leaderboard-table th.col-puntos,
+.leaderboard-table td.col-puntos {
+  text-align: center;
+}
+/* Líneas verticales de separación (como en la referencia) */
+.leaderboard-table th:nth-child(1),
+.leaderboard-table td:nth-child(1) {
+  border-right: 2px solid var(--sollte-gray);
+}
+.leaderboard-table th:nth-child(2),
+.leaderboard-table td:nth-child(2) {
+  border-right: 2px solid var(--sollte-gray);
+}
+.leaderboard-table th.col-puntos,
+.leaderboard-table td.col-puntos {
+  border-right: 2px solid var(--sollte-gray);
+}
+.leaderboard-table th:nth-child(5),
+.leaderboard-table td:nth-child(5) {
+  border-right: 2px solid var(--sollte-gray);
+}
+.leaderboard-table th:nth-child(9),
+.leaderboard-table td:nth-child(9) {
+  border-right: 2px solid var(--sollte-gray);
+}
+/* División columna 26.3 */
+.leaderboard-table th.col-263,
+.leaderboard-table td:nth-child(10) {
+  border-left: 2px solid var(--sollte-gray);
+}
+/* Centrar columnas Puntaje */
+.leaderboard-table .col-puntaje {
+  text-align: center;
+}
+/* Resaltar columna Puntos */
+.leaderboard-table .col-puntos {
+  font-weight: 700;
+  background: rgba(255, 193, 7, 0.08);
+  color: var(--sollte-accent);
+}
+.leaderboard-table th.col-puntos {
+  background: var(--sollte-black);
+  color: var(--sollte-accent);
+}
 .leaderboard-table th {
   font-weight: 600;
   color: var(--sollte-text-muted);
@@ -312,6 +364,9 @@ body {
 .leaderboard-table tbody tr:last-child td { border-bottom: 0; }
 .leaderboard-table tbody tr:hover {
   background: rgba(255,255,255,0.03);
+}
+.leaderboard-table tbody tr:hover .col-puntos {
+  background: rgba(255, 193, 7, 0.12);
 }
 .leaderboard-table .rank { font-weight: 700; color: var(--sollte-accent); }
 .leaderboard-empty {
