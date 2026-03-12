@@ -197,20 +197,43 @@
 
           tableWrap.classList.remove('empty');
           rows.forEach(function (r) {
+            var sum26_1 = (r.puntos261 != null ? r.puntos261 + 'º' : '—') + ' · ' + (r.w261 ? r.w261 + ' reps' : '—');
+            var sum26_2 = (r.puntos262 != null && r.puntos262 !== 0 ? r.puntos262 + 'º' : '—') + ' · ' + (r.w262Tiempo || r.w262Reps || '—');
+            var det26_1 = 'Repeticiones: ' + (r.w261 ? r.w261 : '—');
+            var det26_2 = 'Tiempo: ' + (r.w262Tiempo || '—') + ' · Reps: ' + (r.w262Reps || '—') + ' · Progresión: ' + (r.w262Prog || '—');
             var tr = document.createElement('tr');
+            tr.className = 'leaderboard-row';
+            tr.setAttribute('role', 'button');
+            tr.setAttribute('tabindex', '0');
+            tr.setAttribute('aria-expanded', 'false');
             var posDisplay = r.posicion === 1 ? '1 🥇' : r.posicion === 2 ? '2 🥈' : r.posicion === 3 ? '3 🥉' : String(r.posicion);
             tr.innerHTML =
               '<td class="rank">' + escapeHtml(posDisplay) + '</td>' +
-              '<td>' + escapeHtml(r.nombre) + '</td>' +
+              '<td class="col-nombre"><span class="col-nombre-inner"><span class="nombre-text">' + escapeHtml(r.nombre) + '</span><span class="row-expand-icon" aria-hidden="true">▼</span></span></td>' +
               '<td class="col-puntos">' + escapeHtml(String(r.puntos)) + '</td>' +
-              '<td>' + cell(r.w261) + '</td>' +
-              '<td class="col-puntaje">' + escapeHtml(String(r.puntos261 != null ? r.puntos261 : '—')) + '</td>' +
-              '<td>' + cell(r.w262Tiempo) + '</td>' +
-              '<td>' + cell(r.w262Reps) + '</td>' +
-              '<td>' + cell(r.w262Prog) + '</td>' +
-              '<td class="col-puntaje">' + escapeHtml(String(r.puntos262 != null ? r.puntos262 : '—')) + '</td>' +
-              '<td>' + cell(r.w263) + '</td>';
+              '<td class="col-wod">' + escapeHtml(sum26_1) + '</td>' +
+              '<td class="col-wod">' + escapeHtml(sum26_2) + '</td>';
             leaderboardBody.appendChild(tr);
+            var trDetail = document.createElement('tr');
+            trDetail.className = 'leaderboard-detail';
+            trDetail.innerHTML =
+              '<td colspan="5" class="leaderboard-detail-cell">' +
+              '<div class="leaderboard-detail-inner">' +
+              '<div class="wod-detail"><strong>26.1</strong> — ' + escapeHtml(det26_1) + '</div>' +
+              '<div class="wod-detail"><strong>26.2</strong> — ' + escapeHtml(det26_2) + '</div>' +
+              '</div></td>';
+            leaderboardBody.appendChild(trDetail);
+            tr.addEventListener('click', function () {
+              var open = trDetail.classList.toggle('open');
+              tr.classList.toggle('open', open);
+              tr.setAttribute('aria-expanded', open ? 'true' : 'false');
+            });
+            tr.addEventListener('keydown', function (e) {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                tr.click();
+              }
+            });
           });
         })
         .catch(function () {
@@ -233,20 +256,43 @@
         });
         tableWrap.classList.remove('empty');
         rows.forEach(function (r) {
+          var sum26_1 = (r.puntos || r.posicion) + 'º · ' + (r.w261 ? r.w261 + ' reps' : '—');
+          var sum26_2 = '— · ' + (r.w262 || '—');
+          var det26_1 = 'Repeticiones: ' + (r.w261 || '—');
+          var det26_2 = 'Reps: ' + (r.w262 || '—');
           var tr = document.createElement('tr');
+          tr.className = 'leaderboard-row';
+          tr.setAttribute('role', 'button');
+          tr.setAttribute('tabindex', '0');
+          tr.setAttribute('aria-expanded', 'false');
           var posDisplay = r.posicion === 1 ? '1 🥇' : r.posicion === 2 ? '2 🥈' : r.posicion === 3 ? '3 🥉' : String(r.posicion);
           tr.innerHTML =
             '<td class="rank">' + escapeHtml(posDisplay) + '</td>' +
-            '<td>' + escapeHtml(r.nombre) + '</td>' +
+            '<td class="col-nombre"><span class="col-nombre-inner"><span class="nombre-text">' + escapeHtml(r.nombre) + '</span><span class="row-expand-icon" aria-hidden="true">▼</span></span></td>' +
             '<td class="col-puntos">' + escapeHtml(String(r.puntos)) + '</td>' +
-            '<td>' + cell(r.w261) + '</td>' +
-            '<td class="col-puntaje">' + escapeHtml(String(r.puntos)) + '</td>' +
-            '<td>—</td>' +
-            '<td>' + cell(r.w262) + '</td>' +
-            '<td>—</td>' +
-            '<td class="col-puntaje">—</td>' +
-            '<td>' + cell(r.w263) + '</td>';
+            '<td class="col-wod">' + escapeHtml(sum26_1) + '</td>' +
+            '<td class="col-wod">' + escapeHtml(sum26_2) + '</td>';
           leaderboardBody.appendChild(tr);
+          var trDetail = document.createElement('tr');
+          trDetail.className = 'leaderboard-detail';
+          trDetail.innerHTML =
+            '<td colspan="5" class="leaderboard-detail-cell">' +
+            '<div class="leaderboard-detail-inner">' +
+            '<div class="wod-detail"><strong>26.1</strong> — ' + escapeHtml(det26_1) + '</div>' +
+            '<div class="wod-detail"><strong>26.2</strong> — ' + escapeHtml(det26_2) + '</div>' +
+            '</div></td>';
+          leaderboardBody.appendChild(trDetail);
+          tr.addEventListener('click', function () {
+            var open = trDetail.classList.toggle('open');
+            tr.classList.toggle('open', open);
+            tr.setAttribute('aria-expanded', open ? 'true' : 'false');
+          });
+          tr.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              tr.click();
+            }
+          });
         });
       })
       .catch(function () {

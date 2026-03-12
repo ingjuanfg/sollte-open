@@ -295,28 +295,41 @@ body {
 }
 .leaderboard-table {
   width: 100%;
+  min-width: 280px;
+  table-layout: fixed;
   border-collapse: collapse;
   font-size: 0.95rem;
 }
+.leaderboard-table col.col-pos { width: 10%; }
+.leaderboard-table col.col-name { width: 28%; }
+.leaderboard-table col.col-puntos { width: 14%; }
+.leaderboard-table col.col-w1,
+.leaderboard-table col.col-w2 { width: 19%; }
 .leaderboard-table th,
 .leaderboard-table td {
   padding: 0.75rem 1rem;
   text-align: left;
   border-bottom: 1px solid var(--sollte-gray);
+  box-sizing: border-box;
 }
-/* Centrar encabezados 26.1 y 26.2 sobre sus subcolumnas */
-.leaderboard-table .th-group {
-  text-align: center;
+@media (max-width: 599px) {
+  .leaderboard-table th,
+  .leaderboard-table td {
+    padding: 0.5rem 0.5rem;
+    font-size: 0.875rem;
+  }
+  .leaderboard-table col.col-pos { width: 12%; }
+  .leaderboard-table col.col-name { width: 30%; }
+  .leaderboard-table col.col-puntos { width: 14%; }
+  .leaderboard-table col.col-w1,
+  .leaderboard-table col.col-w2 { width: 22%; }
 }
-.leaderboard-table .th-group-26-2 {
-  text-align: center;
-}
-/* Puntos: centrado en la columna */
+/* Puntos: centrado */
 .leaderboard-table th.col-puntos,
 .leaderboard-table td.col-puntos {
   text-align: center;
 }
-/* Líneas verticales de separación (como en la referencia) */
+/* Líneas verticales de separación (5 columnas) */
 .leaderboard-table th:nth-child(1),
 .leaderboard-table td:nth-child(1) {
   border-right: 2px solid var(--sollte-gray);
@@ -329,22 +342,84 @@ body {
 .leaderboard-table td.col-puntos {
   border-right: 2px solid var(--sollte-gray);
 }
-.leaderboard-table th:nth-child(5),
-.leaderboard-table td:nth-child(5) {
+.leaderboard-table th:nth-child(4),
+.leaderboard-table td:nth-child(4) {
   border-right: 2px solid var(--sollte-gray);
 }
-.leaderboard-table th:nth-child(9),
-.leaderboard-table td:nth-child(9) {
-  border-right: 2px solid var(--sollte-gray);
+/* Filas clicables (estilo CrossFit Games) */
+.leaderboard-table .leaderboard-row {
+  cursor: pointer;
 }
-/* División columna 26.3 */
-.leaderboard-table th.col-263,
-.leaderboard-table td:nth-child(10) {
-  border-left: 2px solid var(--sollte-gray);
+.leaderboard-table .leaderboard-row:hover {
+  background: rgba(255,255,255,0.06);
 }
-/* Centrar columnas Puntaje */
-.leaderboard-table .col-puntaje {
+.leaderboard-table .col-wod {
+  font-size: 0.9rem;
+  min-width: 0;
+  word-break: break-word;
+}
+.leaderboard-table .col-nombre {
+  overflow: hidden;
+}
+.leaderboard-table .col-nombre-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  min-width: 0;
+}
+.leaderboard-table .nombre-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.leaderboard-table .row-expand-icon {
+  font-size: 0.65rem;
+  color: var(--sollte-accent);
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+.leaderboard-table .leaderboard-row.open .row-expand-icon {
+  transform: rotate(180deg);
+}
+.leaderboard-legend {
+  font-size: 0.875rem;
+  color: var(--sollte-text-muted);
+  margin: 0 0 0.5rem 0;
   text-align: center;
+  max-width: 900px;
+  width: 100%;
+}
+/* Fila de detalle expandible */
+.leaderboard-table .leaderboard-detail {
+  display: none;
+}
+.leaderboard-table .leaderboard-detail.open {
+  display: table-row;
+}
+.leaderboard-table .leaderboard-detail-cell {
+  padding: 0;
+  vertical-align: top;
+  border-bottom: 1px solid var(--sollte-gray);
+  background: rgba(0,0,0,0.25);
+}
+.leaderboard-table .leaderboard-detail-inner {
+  padding: 0.75rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.leaderboard-table .wod-detail {
+  font-size: 0.875rem;
+  color: var(--sollte-text-muted);
+}
+.leaderboard-table .wod-detail + .wod-detail {
+  margin-top: 0.25rem;
+}
+.leaderboard-table .wod-detail strong {
+  color: var(--sollte-accent);
+  margin-right: 0.25rem;
 }
 /* Resaltar columna Puntos */
 .leaderboard-table .col-puntos {
