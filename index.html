@@ -53,11 +53,7 @@
 
     <!-- Sección Leaderboard -->
     <section class="section-leaderboard" aria-label="Leaderboard">
-      <h2 class="section-title section-title-leaderboard">LEADERBOARD</h2>
-      <div class="leaderboard-tabs" role="tablist">
-        <button type="button" class="tab active" role="tab" data-location="envigado" aria-selected="true">ENVIGADO</button>
-        <button type="button" class="tab" role="tab" data-location="pereira">PEREIRA</button>
-      </div>
+      <h2 class="section-title section-title-leaderboard">LEADERBOARD ENVIGADO</h2>
       <div class="leaderboard-filters">
         <div class="filter-group">
           <span class="filter-label">Género</span>
@@ -83,14 +79,16 @@
             <col class="col-puntos">
             <col class="col-w1">
             <col class="col-w2">
+            <col class="col-w3">
           </colgroup>
           <thead>
             <tr>
-              <th scope="col">Posición</th>
+              <th scope="col"><span class="th-desktop">Posición</span><span class="th-mobile">#</span></th>
               <th scope="col">Nombre</th>
-              <th scope="col" class="col-puntos">Puntos</th>
+              <th scope="col" class="col-puntos"><span class="th-desktop">Puntos</span><span class="th-mobile">Pts.</span></th>
               <th scope="col">26.1</th>
               <th scope="col">26.2</th>
+              <th scope="col">26.3</th>
             </tr>
           </thead>
           <tbody id="leaderboard-body">
